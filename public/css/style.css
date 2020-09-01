@@ -1,0 +1,21 @@
+
+body{
+    box-sizing: border-box;
+}
+
+.navbar-collapse{
+    justify-content: flex-end;
+    text-align: center;
+}
+.row{
+    justify-content: center;
+}
+.card{
+    max-width: 330px;
+}
+.item-img img{
+    width: 250px;
+}
+.collection .collection-item.avatar{
+    padding-left: 6%;
+}
