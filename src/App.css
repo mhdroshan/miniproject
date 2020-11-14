@@ -36,3 +36,62 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+/* Form */
+.createForm{
+  text-align: center;
+  margin: auto;
+  position: absolute;
+  height: 100%;
+  top: 50%;
+  right: 50%;
+  margin-right: -250px;
+  width: 100%;
+  max-width: 500px;
+  margin-top: -250px;
+  max-height: 500px;
+  
+}
+.subButt{
+  background-color: green;
+  font-size: 20px;
+  font-weight: bold;
+  width: 50%;
+  cursor: pointer;
+  color: white;
+ text-transform: uppercase;
+  border-radius: 40px;
+  margin: 10px auto;
+  padding: 10px 10px;
+
+}
+
+.createForm input,
+.createForm textarea{
+  width: 100%;
+  max-width: 400px;
+  border-radius: 7px;
+  margin: 10px;
+  padding: 10px 10px;
+  font-size: 18px;
+  border: none;
+  background: rgba(83, 83, 83, 0.226);
+
+}
+.createForm h1{
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
