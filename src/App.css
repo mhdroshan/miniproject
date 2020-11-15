@@ -63,9 +63,16 @@
   color: white;
  text-transform: uppercase;
   border-radius: 40px;
+  border: .5px solid green;
   margin: 10px auto;
   padding: 10px 10px;
 
+}
+.subButt:focus{
+  outline: none;
+  
+  background-color: white;
+  color: green;
 }
 
 .createForm input,
@@ -80,13 +87,35 @@
   background: rgba(83, 83, 83, 0.226);
 
 }
+.createForm input:focus,
+.createForm textarea:focus{
+  outline: none;
+
+}
 .createForm h1{
   text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 20px;
 }
 
 
 
+input.error {
+  border: 1px solid #EADAE4;
+}
 
+.error {
+  color:#dc0b0b;
+  font-size: 12px;
+  display: relative;
+}
+.formField{
+  display: flex;
+  flex-direction: column;
+  margin: 0px auto 0px auto;
+  align-items: center;
+
+}
 
 
 
