@@ -38,6 +38,7 @@ exports.addmessage = (req, res) => {
   // Create a user
   const messages = {
     send_id: req.body.send_id,
+    sender_name: req.body.sender_name,
     rec_id: req.body.rec_id,
     message: req.body.message,
     // u_pass: req.body.password,
@@ -68,6 +69,8 @@ exports.findAll = (req, res) => {
 
   Messages.findAll({
     group: ["pro_id"],
+    order: [["id", "ASC"]],
+    // group: ["send_id"],
     where: {
       rec_id: rec_id,
 
@@ -93,9 +96,48 @@ exports.findAllByUser = (req, res) => {
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
   Messages.findAll({
+    order: [["createdAt", "ASC"]],
     where: {
       pro_id: pro_id,
+
+      // rec_id: rec_id,
+      // send_id: send_id,
+
       [Op.or]: [
+        {
+          rec_id: [send_id, rec_id],
+        },
+        {
+          send_id: [rec_id, send_id],
+        },
+      ],
+    },
+    // include: [db.users],
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving products.",
+      });
+    });
+};
+exports.findAllByUserHome = (req, res) => {
+  const send_id = req.params.sid;
+  const rec_id = req.params.rid;
+  const pro_id = req.params.pid;
+  // const title = req.query.title;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+
+  Messages.findAll({
+    where: {
+      pro_id: pro_id,
+      // rec_id: rec_id,
+      // send_id: send_id,
+
+      [Op.and]: [
         {
           rec_id: [rec_id, send_id],
         },
@@ -103,6 +145,42 @@ exports.findAllByUser = (req, res) => {
           send_id: [send_id, rec_id],
         },
       ],
+    },
+    // include: [db.users],
+  })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving products.",
+      });
+    });
+};
+
+// get all of my product based and sederbASED MESAGES
+
+exports.findAllByProd = (req, res) => {
+  const user_id = req.params.uid;
+  const pro_id = req.params.pid;
+  // const title = req.query.title;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+
+  Messages.findAll({
+    group: ["send_id"],
+    where: {
+      pro_id: pro_id,
+      rec_id: user_id,
+
+      // [Op.or]: [
+      //   {
+      //     rec_id: [rec_id, send_id],
+      //   },
+      //   {
+      //     send_id: [send_id, rec_id],
+      //   },
+      // ],
     },
     // include: [db.users],
   })

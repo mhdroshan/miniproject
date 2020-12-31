@@ -7,12 +7,12 @@ const formidable = require("formidable");
 // retrieve products from db
 exports.findAll = (req, res) => {
   const title = req.query.title;
-  var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+  // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
   Products.findAll({
-    where: condition,
+    // where: condition,
     order: [["rating", "DESC"]],
-    include: [db.users],
+    // include: [db.users],
   })
     .then((data) => {
       res.send(data);

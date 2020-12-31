@@ -7,6 +7,8 @@ module.exports = (app) => {
   // Retrieve all messages
   router.get("/one/:id", messages.findAll);
   router.get("/all/:sid/:rid/:pid", messages.findAllByUser);
+  router.get("/home/:sid/:rid/:pid", messages.findAllByUserHome);
+  router.get("/allPro/:pid/:uid", messages.findAllByProd);
   // router.get("/all/:Uid", messages.findAllByUser);
 
   //   router.get("/getbyUser/:user", products.findAllByUser);

@@ -25,6 +25,10 @@ module.exports = (sequelize, Sequelize) => {
       type: dataType.INTEGER,
       allowNull: false,
     },
+    sender_name: {
+      type: dataType.STRING,
+      allowNull: false,
+    },
   });
 
   return message;
