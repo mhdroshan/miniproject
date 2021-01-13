@@ -10,7 +10,6 @@ module.exports = (app) => {
   router.get("/", products.findAll);
   router.get("/:id", products.findAllbyId);
   router.post("/rating/:id", products.addrating);
-
   router.get("/getbyUser/:user", products.findAllByUser);
   router.get("/getbyType/:type", products.findAllByCollection);
 

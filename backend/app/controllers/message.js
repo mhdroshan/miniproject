@@ -69,7 +69,7 @@ exports.findAll = (req, res) => {
 
   Messages.findAll({
     group: ["pro_id"],
-    order: [["id", "ASC"]],
+    order: [["sender_name", "ASC"]],
     // group: ["send_id"],
     where: {
       rec_id: rec_id,
@@ -102,13 +102,12 @@ exports.findAllByUser = (req, res) => {
 
       // rec_id: rec_id,
       // send_id: send_id,
-
-      [Op.or]: [
+      [Op.and]: [
         {
-          rec_id: [send_id, rec_id],
+          rec_id: [rec_id, send_id],
         },
         {
-          send_id: [rec_id, send_id],
+          send_id: [send_id, rec_id],
         },
       ],
     },
@@ -132,6 +131,7 @@ exports.findAllByUserHome = (req, res) => {
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
 
   Messages.findAll({
+    order: [["createdAt", "ASC"]],
     where: {
       pro_id: pro_id,
       // rec_id: rec_id,

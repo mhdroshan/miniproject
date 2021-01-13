@@ -21,7 +21,7 @@ module.exports = (app) => {
   router.post("/", users.create);
 
   // Retrieve all users
-  router.get("/", users.findAll);
+  router.get("/admin", users.findAll);
 
   // profile image upload
 
@@ -35,7 +35,7 @@ module.exports = (app) => {
   router.get("/photo/:id", users.photo);
 
   // Update a Tutorial with id
-  router.put("/", users.update);
+  router.put("/:id", users.update);
   // router.put("/:id", users.update);
 
   // Delete a Tutorial with id

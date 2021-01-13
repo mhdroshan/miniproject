@@ -134,11 +134,30 @@ exports.create = (req, res, file) => {
 };
 
 // Retrieve all Tutorials from the database.
-exports.findAll = (req, res) => {};
+exports.findAll = (req, res) => {
+  console.log('in find all')
+
+  Users.findAll({
+    // order: [["u_name", "DESC"]],
+  })
+  .then((data) => {
+    console.log(data);
+    res.send(data);
+  })
+  .catch((err) => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving users.",
+    });
+  });
+};
 
 // Find a single Tutorial with an id
 exports.findUser = (req, res) => {
+  console.log('in find user')
+
   const user = req.params.id;
+  console.log(req.params.id);
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   Users.findOne({
     where: {
@@ -146,6 +165,7 @@ exports.findUser = (req, res) => {
     },
   })
     .then((data) => {
+      console.log(data);
       res.send(data);
       // res.send(data.userId);
     })
@@ -158,10 +178,53 @@ exports.findUser = (req, res) => {
 };
 
 // Update a Tutorial by the id in the request
-exports.update = (req, res) => {};
+exports.update = (req, res) => {
+  const id = req.params.id;
+  let userUpd = {
+    verified:1,
+  }
+  Users.update(userUpd,{
+    where: {
+      id: id,
+    },
+  })
+  
+  .then((data) => {
+    res.send(data);
+    // res.send(data.userId);
+  })
+  .catch((err) => {
+    res.status(500).send({
+      message:
+        err.message || "Some error occurred while retrieving products.",
+    });
+  });
+};
 
 // Delete a Tutorial with the specified id in the request
-exports.delete = (req, res) => {};
+exports.delete = (req, res) => {
+  const id = req.params.id;
+
+  Users.destroy({
+    where: { id: id },
+  })
+    .then((num) => {
+      if (num == 1) {
+        res.send({
+          message: "User was deleted successfully!",
+        });
+      } else {
+        res.send({
+          message: `Cannot delete User with id=${id}. Maybe Products was not found!`,
+        });
+      }
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message: "Could not delete user with id=" + id,
+      });
+    });
+};
 
 // Delete all Tutorials from the database.
 exports.deleteAll = (req, res) => {};

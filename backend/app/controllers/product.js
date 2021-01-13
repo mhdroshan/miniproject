@@ -43,6 +43,7 @@ exports.findAllByCollection = (req, res) => {
     });
 };
 exports.findAllByUser = (req, res) => {
+  // console.log(req.params);
   const user = req.params.user;
   // var condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
   Products.findAll({
@@ -52,7 +53,7 @@ exports.findAllByUser = (req, res) => {
   })
     .then((data) => {
       res.send(data);
-      res.send(data.userId);
+      // res.send(data.userId);
     })
     .catch((err) => {
       res.status(500).send({
@@ -155,6 +156,7 @@ exports.addproduct = (req, res) => {
       description: fields.desc,
       catogary: fields.catogary,
       price: fields.price,
+      rating:fields.rating,
       p_photo: fs.readFileSync(files.images.path),
       photoContentType: files.images.type,
     };
@@ -182,10 +184,11 @@ exports.addproduct = (req, res) => {
 };
 
 exports.findAllbyId = (req, res) => {
+  // console.log(req.params.id);
   const id = req.params.id;
   Products.findAll({
     where: {
-      id,
+      id:id,
     },
   })
     .then((data) => {

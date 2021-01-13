@@ -37,6 +37,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     rating: {
       type: dataType.INTEGER,
+      
     },
   });
 
